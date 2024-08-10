@@ -1,0 +1,197 @@
+<div data-v-a9660e98="" class="tab c-row c-row-between">
+    <div data-v-a9660e98="" class="li c-row c-row-center">
+        <span data-v-a9660e98="" class="txt action">
+            Game History
+        </span>
+    </div>
+    <div data-v-a9660e98="" class="li c-row c-row-center">
+        <span data-v-a9660e98="" class="txt"> My history </span>
+    </div>
+    <div data-v-a9660e98="" class="li c-row c-row-center">
+        <span data-v-a9660e98="" class="txt"> Chart </span>
+    </div>
+</div>
+<div data-v-a9660e98="" class="con-box"> 
+    <div data-v-a9660e98="" class="list m-t-10">
+        <div data-v-a9660e98="" class="wrap">
+            <div data-v-a9660e98="" class="c-tc van-row">
+                <div data-v-a9660e98="" class="van-col van-col--4">
+                    Period
+                </div>
+                <div data-v-a9660e98="" class="van-col van-col--5">
+                    Block ID
+                </div>
+                <div data-v-a9660e98="" class="van-col van-col--5">
+                    Block time
+                </div>
+                <div data-v-a9660e98="" class="van-col van-col--6">
+                    Hash value
+                </div>
+                <div data-v-a9660e98="" class="van-col van-col--2">
+                    Result
+                </div>
+            </div>
+        </div>
+        <!-- <div data-v-a9660e98="">
+            <div data-v-a9660e98="" class="hb"></div>
+        </div> -->
+        <ul style="color: red" id="trx-data-list">
+        </ul>
+        <div data-v-a9660e98="" class="list-fooder"></div>
+    </div>
+    <div data-v-a9660e98="" class="page-nav c-row c-row-center c-tc">
+        <div data-v-a9660e98="" class="arr c-row c-row-middle-center block-click">
+            <i data-v-a9660e98="" class="van-icon van-icon-arrow-left icon" style="font-size: 20px">
+                <!---->
+            </i>
+        </div>
+        <div data-v-a9660e98="" class="number"></div>
+        <div data-v-a9660e98="" class="arr c-row c-row-middle-center action">
+            <i data-v-a9660e98="" class="van-icon van-icon-arrow icon action" style="font-size: 20px">
+                <!---->
+            </i>
+        </div>
+    </div>
+</div>
+<!-- <div data-v-a9660e98="" class="con-box p-b-20" style="display: none">
+    <div data-v-a9660e98="" class="list m-t-10">
+        <div data-v-a9660e98="" class="wrap">
+            <div data-v-a9660e98="" class="c-tc van-row">
+                <div data-v-a9660e98="" class="van-col van-col--8">Draw</div>
+                <div data-v-a9660e98="" class="van-col van-col--16">
+                    Quantity
+                </div>
+            </div>
+        </div>
+        <div data-v-a9660e98="" class="p-t-5 p-b-5">
+            <div data-v-a9660e98="" class="van-empty">
+                <div class="van-empty__image">
+                    <img src="https://img.yzcdn.cn/vant/empty-image-default.png" />
+                </div>
+                <p class="van-empty__description">No Data</p>
+            </div>
+        </div>
+        <div data-v-a9660e98="" class="list-fooder"></div>
+    </div>
+    <div data-v-a9660e98="" class="page-nav c-row c-row-center c-tc">
+        <div data-v-a9660e98="" class="arr c-row c-row-middle-center">
+            <i data-v-a9660e98="" class="van-icon van-icon-arrow-left icon" style="font-size: 20px">
+            </i>
+        </div>
+        <div data-v-a9660e98="" class="number">1/1965</div>
+        <div data-v-a9660e98="" class="arr c-row c-row-middle-center action">
+            <i data-v-a9660e98="" class="van-icon van-icon-arrow icon action" style="font-size: 20px">
+            </i>
+        </div>
+    </div>
+</div> -->
+<div data-v-a9660e98="" class="con-box p-b-20" style="display: none">
+    <div data-v-a9660e98="" class="c-row c-flew-end p-r-20">
+        <div data-v-a9660e98="" class="bettingMore c-tc c-row c-row-middle-center">
+            More<i data-v-a9660e98="" class="van-icon van-icon-arrow"
+                style="color: rgb(84, 94, 104); font-size: 15px">
+                <!---->
+            </i>
+        </div>
+    </div>
+    <div data-v-a9660e98="" class="list m-t-10">
+        <div data-v-a9660e98="" class="p-t-5 p-b-5" id="history-order">
+            
+        </div>
+        <div data-v-a9660e98="" class="list-fooder"></div>
+    </div>
+    <!---->
+    <div data-v-a9660e98="" class="page-nav c-row c-row-center c-tc">
+        <div data-v-a9660e98="" class="arr c-row c-row-middle-center">
+            <i data-v-a9660e98="" class="van-icon van-icon-arrow-left icon" style="font-size: 20px">
+                <!---->
+            </i>
+        </div>
+        <div data-v-a9660e98="" class="number"></div>
+        <div data-v-a9660e98="" class="arr c-row c-row-middle-center action">
+            <i data-v-a9660e98="" class="van-icon van-icon-arrow icon action" style="font-size: 20px">
+                <!---->
+            </i>
+        </div>
+    </div>
+</div>
+
+<script>
+    socket.on('data-server-trx', function (data) {
+      // console.log('Received data:', data);
+  
+      // Assuming data is an array of objects
+      const dataArray = data.data;
+  
+      // Clear previous data
+      const trxDataList = document.getElementById('trx-data-list');
+      trxDataList.innerHTML = '';
+  
+      // Iterate over the array and create list items
+      dataArray.forEach(item => {
+        // Format the hash to include ***
+        const formattedHash = `***${item.hash.slice(-4)}`;
+  
+        // Format the period as required
+        const formattedPeriod = `202**${item.period.toString().slice(-4)}`;
+  
+        // Determine if result is big or small
+        const isBig = item.bigsmall === 'big';
+        const resultValue = isBig ? 'B' : 'S';
+  
+        // Create circular badge style for result
+        const resultStyle = `
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                background-color: ${isBig ? '#28a745' : '#dc3545'}; /* Green for big, Red for small */
+                color: white;
+                font-size: 14px;
+            `;
+  
+        // Create list item with inline styles
+        const li = document.createElement('li');
+        li.style.marginBottom = '10px'; // Example inline style
+  
+        // Construct HTML content for the list item with inline styles
+        li.innerHTML = `
+          <div class="wrap" style="display: flex; justify-content: space-between; padding: 8px 0;">
+            <div class="c-tc van-row" style="display: flex; flex-wrap: nowrap;">
+              <div class="van-col van-col--6" style="padding-right: 10px; padding-left: 10px; color:black; padding-top: 25px;">
+                ${formattedPeriod}
+              </div>
+              <div class="van-col van-col--5" style="padding-right: 10px; padding-left: 10px; color:black;">
+              
+                <img src="/images/a.png" alt="Clickable Image" style="cursor: pointer;" style="width:35%" onclick="openUrl('https://tronscan.org/#/block/${item.block}')" />
+                ${item.block}
+              </div>
+              <div class="van-col van-col--5" style="padding-right: 10px; padding-left: 10px; color:black; padding-top: 25px;">
+                ${item.time}
+              </div>
+              <div class="van-col van-col--4" style="padding-right: 10px; padding-left: 10px; color:black; padding-top: 25px;">
+                ${formattedHash}
+              </div>
+              <div class="van-col van-col--4" style="padding-right: 10px; padding-left: 10px; color:black; padding-top: 25px;">
+                <span style="${resultStyle}">${item.result}</span>
+              </div>
+              <div class="van-col van-col--2" style="padding-right: 10px; color:black; padding-top: 25px;">
+                ${resultValue}
+              </div>
+            </div>
+          </div>
+        `;
+  
+        // Append the list item to the UL
+        trxDataList.appendChild(li);
+      });
+    });
+  </script>
+  <script>
+    // Function to handle the image click
+    function openUrl(url) {
+        window.location.href = url;
+    }
+  </script>

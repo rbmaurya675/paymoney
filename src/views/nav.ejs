@@ -1,0 +1,78 @@
+<style>
+    .block-click {
+        pointer-events: none;  
+    }
+</style>
+
+<div data-v-432e6ed0="" class="nav c-pr" id="nav_checkUrl" data-url="">
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--fixed">
+        <div class="van-tabbar-item" data-url="/home" onclick="location.href='/home'">
+            <div class="van-tabbar-item__icon">
+                <!---->
+            </div>
+            <div class="van-tabbar-item__text">
+                <div>
+                    <img src="/images/a11.png">
+                </div>
+                <span class="name">Home</span>
+            </div>
+        </div>
+        <div class="van-tabbar-item" data-url="/checkIn" onclick="location.href='/checkIn'">
+            <div class="van-tabbar-item__icon">
+                <!---->
+            </div>
+            <div class="van-tabbar-item__text">
+                <div>
+                    <img src="/images/a21.png">
+                </div>
+                <span class="name">Activity</span>
+            </div>
+        </div>
+        <div class="van-tabbar-item" data-url="/promotion" onclick="location.href='/promotion'">
+            <div class="van-tabbar-item__icon">
+                <!---->
+            </div>
+            <div class="van-tabbar-item__text">
+                <div class="muan">
+                    <img src="/images/a3.png" class="img">
+                </div>
+                <span class="name">Promotion</span>
+            </div>
+        </div>
+        <div class="van-tabbar-item" data-url="/wallet">
+            <button class="van-tabbar-item__text" id="wallet" style="border: 0;">
+                <div>
+                    <img src="/images/a41.png">
+                </div>
+                <span class="name">Wallet</span>
+            </button>
+            <audio id="audio" src="/images/wll.mp3"></audio>         
+        </div>        
+        <div class="van-tabbar-item" data-url="/mian" onclick="location.href='/mian'">
+            <div class="van-tabbar-item__icon">
+                <!---->
+            </div>
+            <div class="van-tabbar-item__text">
+                <div>
+                    <img src="/images/a51.png">
+                </div>
+                <span class="name">Account</span>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<script>
+   document.getElementById("wallet").addEventListener("click", function(event) {
+    event.preventDefault();
+    
+    var audio = document.getElementById("audio");
+    
+    audio.addEventListener("ended", function() {
+        window.location.href = '/wallet';
+    });
+
+    // Play audio
+    audio.play();
+});
+</script>
