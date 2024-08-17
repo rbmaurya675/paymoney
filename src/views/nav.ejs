@@ -63,16 +63,27 @@
 </div>
   
 <script>
-   document.getElementById("wallet").addEventListener("click", function(event) {
+//    document.getElementById("wallet").addEventListener("click", function(event) {
+//     event.preventDefault();
+    
+//     var audio = document.getElementById("audio");
+    
+//     audio.addEventListener("ended", function() {
+//         window.location.href = '/wallet';
+//     });
+
+//     // Play audio
+//     audio.play();
+document.getElementById("wallet").addEventListener("click", function(event) {
     event.preventDefault();
     
     var audio = document.getElementById("audio");
     
-    audio.addEventListener("ended", function() {
-        window.location.href = '/wallet';
-    });
-
-    // Play audio
+    // Start playing the audio
     audio.play();
+    
+    // Redirect to the wallet page immediately
+    window.location.href = '/wallet';
 });
+
 </script>

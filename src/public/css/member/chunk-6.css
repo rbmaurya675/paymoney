@@ -118,7 +118,7 @@
     /* background: url(/images/bg_top.png) no-repeat 50%; */
     background-size: 100% 100%;
     height: 4.8rem;
-    background-color: #b0be2c;
+    background-color: #f72323;
 }
 
 .mian .menu-box .info .state-info .txt[data-v-8cd483ca] {
@@ -166,14 +166,14 @@
     border-radius: .8rem;
     text-align: center;
     width: 100%;
-    background-color: #a9c025;
+    background-color: #e4c930;
     height: .8rem;
     line-height: .8rem;
     box-shadow: 0 0 .26667rem .02667rem rgba(255,206,31,.4)
 }
 
 .mian .menu-box .total-box .infoItem .infoBtn .item:last-child .li[data-v-8cd483ca] {
-    background-color: #b0be2c;
+    background-color: #e95050;
     box-shadow: 0 0 .26667rem .02667rem rgba(242,65,59,.27)
 }
 
@@ -217,7 +217,7 @@
     margin: 0 .4rem .4rem;
     height: 1.38667rem;
     /* background: url(/images/promotion_bg.png) 0 0 no-repeat; */
-    background-color: yellowgreen;
+    background-color: rgb(236, 16, 16);
     border-radius: 20px;
     background-size: 100% auto;
     font-size: .53333rem;

@@ -8,7 +8,9 @@ let timeNow = Date.now();
 const adminPage = async(req, res) => {
     return res.render("manage/index.ejs"); 
 }
-
+const trxadminPage = async(req, res) => {
+    return res.render("manage/trxindex.ejs"); 
+}
 const adminPage3 = async(req, res) => {
     return res.render("manage/a-index-bet/index3.ejs"); 
 }
@@ -1736,5 +1738,6 @@ module.exports = {
     listOrderOld,
     listOrderOldK3,
     editResult,
-    adminPageK3
+    adminPageK3,
+    trxadminPage
 }

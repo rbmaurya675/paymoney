@@ -1,5 +1,5 @@
 .mian[data-v-11ffe290] {
-    background-color: #235418;
+    background-color: #ffffff;
     padding-bottom: 3.2rem
 }
 
@@ -52,7 +52,7 @@
 
 .mian .check-box .list[data-v-11ffe290] {
     border-radius: .26667rem .26667rem 0 0;
-    background-color: #235418;
+    background-color: #ffffff;
     margin-top: 5PX;
     padding: 0px;
 }
@@ -68,7 +68,7 @@
     overflow: hidden;
     /* margin-right: 3%; */
     height: 160px;
-    opacity: .5;
+    /* opacity: .5; */
 }
 
 .mian .check-box .list .item[data-v-11ffe290]:nth-child(3n) {

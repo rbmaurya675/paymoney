@@ -68,6 +68,9 @@ const initWebRouter = (app) => {
 
     //trx wingo
     router.get('/trx', middlewareController, winGoController.trxwingoPage);
+    router.get('/trx/3', middlewareController, winGoController.trxwingoPage3);
+    router.get('/trx/5', middlewareController, winGoController.trxwingoPage5);
+    router.get('/trx/10', middlewareController, winGoController.trxwingoPage10);
     router.post('/api/webapi/action/jointrx', middlewareController, winGoController.trxbetWinGo); // register
     router.post('/api/webapi/GetMyEmerdListtrx', middlewareController, winGoController.trxGetMyEmerdList); // register
     router.post('/api/webapi/GetNoaverageEmerdListtrx', middlewareController, winGoController.trxlistOrderOld); // register
@@ -155,6 +158,10 @@ const initWebRouter = (app) => {
     router.get('/admin/manager/index/3', adminController.middlewareAdminController, adminController.adminPage3); // get info account
     router.get('/admin/manager/index/5', adminController.middlewareAdminController, adminController.adminPage5); // get info account
     router.get('/admin/manager/index/10', adminController.middlewareAdminController, adminController.adminPage10); // get info account
+
+    // trx admin
+    router.get('/admin/manager/trxindex', adminController.middlewareAdminController, adminController.trxadminPage); 
+
 
     router.get('/admin/manager/5d', adminController.middlewareAdminController, adminController.adminPage5d); // get info account
     router.get('/admin/manager/k3', adminController.middlewareAdminController, adminController.adminPageK3); // get info account

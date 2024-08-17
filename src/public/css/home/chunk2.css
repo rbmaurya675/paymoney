@@ -796,19 +796,19 @@
 
 .home .gameList .item .info.i2[data-v-432e6ed0] {
     background: no-repeat;
-    background-image: linear-gradient(135deg, #00000034, #00000057), url(/images/gradient-blue-pink-abstract-art-wallpaper-preview.jpg);
+    /* background-image: linear-gradient(135deg, #00000034, #00000057), url(/images/gradient-blue-pink-abstract-art-wallpaper-preview.jpg); */
     background-size: 100% 100%
 }
 
 .home .gameList .item .info.i3[data-v-432e6ed0] {
     background: no-repeat;
-    background-image: linear-gradient(135deg, #00000034, #00000057), url(/images/gradient-background-6016x3384-11027.jpg);
+    background-image: url(/images/game-card-bg.webp) no-repeat 50%, linear-gradient(135deg, #64bfff, #2b5dfe);
     background-size: 100% 100%
 }
 
 .home .gameList .item .info.i4[data-v-432e6ed0] {
     background: no-repeat;
-    background-image: linear-gradient(135deg, #00000034, #00000057), url(/images/lovepik-fluid-gradient-background-image_401733169.jpg);
+    /* background-image: linear-gradient(135deg, #00000034, #00000057), url(/images/lovepik-fluid-gradient-background-image_401733169.jpg); */
     background-size: 100% 100%
 }
 
@@ -882,7 +882,8 @@
     height: 1.06667rem;
     font-size: .53333rem;
     line-height: 1.06667rem;
-    margin-bottom: .26667rem
+    margin-bottom: .26667rem;
+    margin-top: -30px;
 }
 
 .home .running-time .flip-num[data-v-432e6ed0] {

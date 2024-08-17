@@ -103,7 +103,7 @@ function showListOrder3(list_orders, x) {
         type: "POST",
         url: "/api/webapi/GetNoaverageEmerdListtrx",
         data: {
-          typeid: "1",
+          typeid: "10",
           pageno: "0",
           pageto: "10",
           language: "vi",
@@ -122,7 +122,7 @@ function showListOrder3(list_orders, x) {
         type: "POST",
         url: "/api/webapi/GetNoaverageEmerdListtrx",
         data: {
-          typeid: "1",
+          typeid: "10",
           pageno: "0",
           pageto: "10",
           language: "vi",
@@ -527,7 +527,7 @@ function showListOrder3(list_orders, x) {
       type: "POST",
       url: "/api/webapi/GetNoaverageEmerdListtrx",
       data: {
-        typeid: "1",
+        typeid: "10",
         pageno: "0",
         pageto: "10",
         language: "vi",
@@ -561,7 +561,7 @@ function showListOrder3(list_orders, x) {
       type: "POST",
       url: "/api/webapi/GetMyEmerdListtrx",
       data: {
-        typeid: "1",
+        typeid: "10",
         pageno: "0",
         pageto: "10",
         language: "vi",
@@ -631,7 +631,7 @@ function showListOrder3(list_orders, x) {
       type: "POST",
       url: "/api/webapi/action/jointrx",
       data: {
-        typeid: "1",
+        typeid: "10",
         join: join,
         x: x,
         money: money,
@@ -932,7 +932,7 @@ function showListOrder3(list_orders, x) {
     type: "POST",
     url: "/api/webapi/GetNoaverageEmerdListtrx",
     data: {
-      typeid: "1",
+      typeid: "10",
       pageno: "0",
       pageto: "10",
       language: "vi",
@@ -990,7 +990,7 @@ function showListOrder3(list_orders, x) {
     type: "POST",
     url: "/api/webapi/GetMyEmerdListtrx",
     data: {
-      typeid: "1",
+      typeid: "10",
       pageno: "0",
       pageto: "10",
       language: "vi",
@@ -1014,7 +1014,7 @@ function showListOrder3(list_orders, x) {
       type: "POST",
       url: "/api/webapi/GetNoaverageEmerdListtrx",
       data: {
-        typeid: "1",
+        typeid: "10",
         pageno: pageno,
         pageto: pageto,
         language: "vi",
@@ -1075,7 +1075,7 @@ function showListOrder3(list_orders, x) {
       type: "POST",
       url: "/api/webapi/GetNoaverageEmerdListtrx",
       data: {
-        typeid: "1",
+        typeid: "10",
         pageno: pageno,
         pageto: pageto,
         language: "vi",
@@ -1136,7 +1136,7 @@ function showListOrder3(list_orders, x) {
       type: "POST",
       url: "/api/webapi/GetMyEmerdListtrx",
       data: {
-        typeid: "1",
+        typeid: "10",
         pageno: pageno,
         pageto: pageto,
         language: "vi",
@@ -1214,7 +1214,7 @@ function showListOrder3(list_orders, x) {
       type: "POST",
       url: "/api/webapi/GetMyEmerdListtrx",
       data: {
-        typeid: "1",
+        typeid: "10",
         pageno: pageno,
         pageto: pageto,
         language: "vi",
@@ -1282,17 +1282,20 @@ function showListOrder3(list_orders, x) {
   
   window.onload = function () {
     function cownDownTimer() {
-      var countDownDate = new Date("2030-07-16T23:59:59.9999999+01:00").getTime();
-      setInterval(function () {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var minute = Math.ceil(minutes / 20 - 2);
-        var seconds1 = Math.floor((distance % (1000 * 60)) / 10000);
-        var seconds2 = Math.floor(((distance % (1000 * 60)) / 1000) % 10);
-        $(".number .item:eq(3)").text(seconds1);
-        $(".number .item:eq(4)").text(seconds2);
-      }, 0);
+        var countDownDate = new Date("2030-07-16T23:59:59.9999999+01:00").getTime();
+        setInterval(function() {
+          var now = new Date().getTime();
+          var distance = countDownDate - now;
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var minute = Math.ceil(minutes % 10);
+          var seconds1 = Math.floor((distance % (1000 * 60)) / 10000);
+          var seconds2 = Math.floor(((distance % (1000 * 60)) / 1000) % 10);
+          // $(".number .item:eq(0)").text(seconds1);
+          $(".number .item:eq(1)").text(minute);
+  
+          $(".number .item:eq(3)").text(seconds1);
+          $(".number .item:eq(4)").text(seconds2);
+        }, 100);
       setInterval(() => {
         var now = new Date().getTime();
         var distance = countDownDate - now;
@@ -1312,9 +1315,11 @@ function showListOrder3(list_orders, x) {
       setInterval(function () {
         var now = new Date().getTime();
         var distance = countDownDate - now;
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var minute = Math.ceil(minutes % 10);
         var seconds1 = Math.floor((distance % (1000 * 60)) / 10000);
         var seconds2 = Math.floor(((distance % (1000 * 60)) / 1000) % 10);
-        if (seconds1 == 0 && seconds2 <= 10) {
+        if (minute == 0 && seconds1 == 0 && seconds2 <= 10) {
           $(".van-overlay").fadeOut();
           $(".popup-join").css("transform", "translateY(600px)");
           $(".betting-mark .amount-box .li, .multiple-box .li").css({

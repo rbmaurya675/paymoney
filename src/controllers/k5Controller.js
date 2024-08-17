@@ -22,6 +22,9 @@ const K5DPage10 = async (req, res) => {
 const K5DPage12 = async (req, res) => {
     return res.render("bet/trwingo/trx.ejs");
 }
+const K5DPage14 = async (req, res) => {
+    return res.render("bet/trwingo/trx3.ejs");
+}
 
 
 const isNumber = (params) => {
@@ -586,6 +589,7 @@ module.exports = {
     K5DPage5,
     K5DPage10,
     K5DPage12,
+    K5DPage14,
     betK5D,
     listOrderOld,
     GetMyEmerdList,

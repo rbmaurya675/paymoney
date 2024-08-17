@@ -24,6 +24,15 @@ const winGoPage10 = async (req, res) => {
 const trxwingoPage = async (req, res) => {
     return res.render("bet/wingo/trx.ejs");
 }
+const trxwingoPage3 = async (req, res) => {
+    return res.render("bet/wingo/trx3.ejs");
+}
+const trxwingoPage5 = async (req, res) => {
+    return res.render("bet/wingo/trx5.ejs");
+}
+const trxwingoPage10 = async (req, res) => {
+    return res.render("bet/wingo/trx10.ejs");
+}
 
 
 const isNumber = (params) => {
@@ -592,7 +601,7 @@ const handlingWinGo1P = async (typeid) => {
 
 const trxlistOrderOld = async (req, res) => {
     let { typeid, pageno, pageto } = req.body;
-    console.log("typeed orderlist....",typeid)
+    // console.log("typeed orderlist....",typeid)
 
     if (typeid != 1 && typeid != 3 && typeid != 5 && typeid != 10) {
         return res.status(200).json({
@@ -619,9 +628,10 @@ const trxlistOrderOld = async (req, res) => {
     if (typeid == 5) game = '3';
     if (typeid == 10) game = '4';
 
-    const [wingo] = await connection.query(`SELECT * FROM trx WHERE status != 0 AND type = '${game}' ORDER BY id DESC LIMIT ${pageno}, ${pageto} `);
-    const [wingoAll] = await connection.query(`SELECT * FROM trx WHERE status != 0 AND type = '${game}' `);
-    const [period] = await connection.query(`SELECT period FROM trx WHERE status = 0 AND type = '${game}' ORDER BY id DESC LIMIT 1 `);
+    const [wingo] = await connection.query(`SELECT * FROM trx WHERE status = 0 AND type = '${game}' ORDER BY id DESC LIMIT ${pageno}, ${pageto} `);
+    // console.log("winog [0] data as....",wingo[0])
+    const [wingoAll] = await connection.query(`SELECT * FROM trx WHERE status = 0 AND type = '${game}' `);
+    const [period] = await connection.query(`SELECT period FROM trx WHERE status != 0 AND type = '${game}' ORDER BY id DESC LIMIT 1 `);
     if (!wingo[0]) {
         return res.status(200).json({
             code: 0,
@@ -650,6 +660,10 @@ const trxlistOrderOld = async (req, res) => {
         status: true
     });
 }
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3000');
+
 const trxbetWinGo = async (req, res) => {
     let { typeid, join, x, money } = req.body;
     console.log("typid for .trx...",typeid)
@@ -686,7 +700,53 @@ const trxbetWinGo = async (req, res) => {
         return uniqueID;
     }
     const id = generateUniqueID();
-    console.log("Generated IDs:", id);
+    console.log("id.....",id)
+    const periodid = Number(id);
+//
+const [periodDatafromDatabase] = await connection.execute('SELECT period FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 1', []);
+            console.log("periodDatafrom database.......",periodDatafromDatabase)
+            let periodfrom = periodDatafromDatabase[0].period;
+                // Convert the period to a number and add 1
+                const newPeriodfromdatabase = Number(periodfrom) + 1;
+                console.log("Updated period value:", newPeriodfromdatabase);
+    const [periodDatafromDatabasefive] = await connection.execute('SELECT period FROM trx WHERE type = 3 ORDER BY id DESC LIMIT 1', []);
+    console.log("periodDatafrom database.......",periodDatafromDatabasefive)
+    let periodfromfive = periodDatafromDatabasefive[0].period;
+        // Convert the period to a number and add 1
+        const newPeriodfromdatabasefive = Number(periodfromfive) + 1;
+        console.log("Updated period value:", newPeriodfromdatabasefive);
+    const [periodDatafromDatabaseten] = await connection.execute('SELECT period FROM trx WHERE type = 4 ORDER BY id DESC LIMIT 1', []);
+    console.log("periodDatafrom database.......",periodDatafromDatabaseten)
+    let periodfromten = periodDatafromDatabaseten[0].period;
+        // Convert the period to a number and add 1
+        const newPeriodfromdatabaseten = Number(periodfromten) + 1;
+        console.log("Updated period value:", newPeriodfromdatabaseten);
+    // Adjusting newPeriodid based on typeid
+    let newPeriodid;
+    switch (typeid) {
+        case '1':
+            console.log("1...............")
+            newPeriodid = periodid + 1;
+            break;
+        case '3':
+            console.log("3............")
+            newPeriodid = newPeriodfromdatabase;
+            break;
+        case '5':
+            console.log("5............")
+            newPeriodid = newPeriodfromdatabasefive;
+            break;
+        case '10':
+            console.log("5............")
+            newPeriodid = newPeriodfromdatabaseten;
+            break;
+        default:
+            return res.status(400).json({
+                message: 'Invalid typeid value!',
+                status: false
+            });
+    }
+    console.log("new period id....",newPeriodid)
     let auth = req.cookies.auth;
 
     if (typeid != 1 && typeid != 3 && typeid != 5 && typeid != 10) {
@@ -826,7 +886,7 @@ const trxbetWinGo = async (req, res) => {
         status = ?,
         today = ?,
         time = ?`;
-        await connection.execute(sql, [id_product, userInfo.phone, userInfo.code, userInfo.invite, id, userInfo.level, total, x, fee, 0, gameJoin, join, 0, checkTime, timeNow]);
+        await connection.execute(sql, [id_product, userInfo.phone, userInfo.code, userInfo.invite, newPeriodid, userInfo.level, total, x, fee, 0, gameJoin, join, 0, checkTime, timeNow]);
         await connection.execute('UPDATE `users` SET `money` = `money` - ? WHERE `token` = ? ', [money * x, auth]);
         const [users] = await connection.query('SELECT `money`, `level` FROM users WHERE token = ? AND veri = 1  LIMIT 1 ', [auth]);
         await rosesPlus(auth, money * x);
@@ -1077,5 +1137,8 @@ module.exports = {
     winGoPage3,
     winGoPage5,
     winGoPage10,
-    trxwingoPage
+    trxwingoPage,
+    trxwingoPage3,
+    trxwingoPage5,
+    trxwingoPage10,
 }

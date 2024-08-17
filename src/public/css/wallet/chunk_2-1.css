@@ -1,6 +1,6 @@
 .mian[data-v-7b283485] {
     padding-bottom: 4rem;
-    background-image: linear-gradient(90deg, #7aaa1f, #bdb331);}
+    background-image: linear-gradient(90deg, #ffffff, #ffffff);}
 
 .mian .head-right[data-v-7b283485] {
     border-radius: .26667rem;
@@ -15,7 +15,7 @@
 .mian .wallet-user[data-v-7b283485] {
     padding: .53333rem .8rem 3.2rem;
     background:url(/images/banlance_bg.png) no-repeat 50%;
-    background-image: linear-gradient(90deg, #98a116, #bdb331);
+    background-image: linear-gradient(90deg, #e44343, #da9191);
     background-size: 100% 100%;
     width: 100%
 }
@@ -46,7 +46,7 @@
     position: relative;
     padding: .4rem;
     border-radius: .13333rem;
-    background: #859413;
+    background: #ffffff;
 }
 
 .mian .wallet-box .box .icon1[data-v-7b283485] {
@@ -68,7 +68,7 @@
 
 .mian .wallet-box .box .balance[data-v-7b283485] {
     padding: .4rem .4rem 0;
-    background: linear-gradient(90deg, #5c8b39 0%, #d1bf39 100%);
+    background: linear-gradient(90deg, #cacc37 0%, #eedb4e 100%);
     border-radius: .26667rem;
     background-size: 100% 100%;
     box-shadow: 0 .05333rem .42667rem 0 rgba(253,188,51,.55);
@@ -154,14 +154,14 @@
     border-radius: 1.06667rem;
     text-align: center;
     width: 100%;
-    background-color: #bbeb0f;
+    background-color: #e4d01e;
     height: 1.06667rem;
     line-height: 1.06667rem;
     /* box-shadow: 0 0 .26667rem .02667rem #005902; */
 }
 
 .mian .wallet-box .total-btn .item:last-child .li[data-v-7b283485] {
-    background-color: #bbeb0f;
+    background-color: #e42222;
     box-shadow: 0 0 .26667rem .02667rem rgba(242,65,59,.27)
 }
 
