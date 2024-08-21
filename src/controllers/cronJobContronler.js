@@ -402,6 +402,12 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
           });
         // console.log("trxdata...", trxdata)
         io.emit('data-server-trx', { data: singletrxdata });
+        const [singletrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
+        const singletrxdatachart = singletrxgetDatachart.map(items => {
+            return items;
+          });
+        // console.log("trxdata...", trxdata)
+        io.emit('data-server-trx-chart', { data: singletrxdatachart });
         const [threetrxgetData] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
         const threetrxdata = threetrxgetData.map(items => {
             // Update hash to show only the last 6 characters
@@ -577,8 +583,45 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
         }
     })
 
+// chart randar data display 
+const avgMissingValues = [9, 8, 6, 11, 13, 6, 7, 9, 8, 2];
+const frequencyValues = [9, 13, 14, 8, 8, 9, 14, 9, 7, 9];
 
+// Function to get random values
+function getRandomValues(values) {
+    return values.map(() => values[Math.floor(Math.random() * values.length)]);
+}
 
+// Cron job to emit updated values every minute
+cron.schedule('*/1 * * * *', () => {
+    const avgMissingRandom = getRandomValues(avgMissingValues);
+    const frequencyRandom = getRandomValues(frequencyValues);
+
+    // Emit the updated values to all connected clients
+    io.emit('updateValues', { avgMissing: avgMissingRandom, frequency: frequencyRandom });
+});
+
+const winningNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+function getRandomMissingNumbers(winningNumber) {
+    const missingNumbers = [];
+    for (let i = 0; i < 10; i++) {
+        if (i === winningNumber) {
+            missingNumbers.push(0); // Ensure the matching winning number has missing value 0
+        } else {
+            missingNumbers.push(Math.floor(Math.random() * 25) + 1); // Random value between 1 and 25
+        }
+    }
+    return missingNumbers;
+}
+
+// Cron job to emit updated values every minute
+cron.schedule('*/1 * * * *', () => {
+    const winningNumber = winningNumbers[Math.floor(Math.random() * winningNumbers.length)];
+    const missingNumbers = getRandomMissingNumbers(winningNumber);
+
+    io.emit('updateNumbers', { winningNumber, missingNumbers });
+});
 
 
     // close
