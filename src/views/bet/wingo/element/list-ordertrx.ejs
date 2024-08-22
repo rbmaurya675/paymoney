@@ -167,11 +167,11 @@
 
     <div class="row">
         <div class="label">Missing</div>
-        <div class="data" id="avg-missing">
+        <div class="data" id="missing-data">
             <span class="plain-text">10</span>
             <span class="plain-text">3</span>
             <span class="plain-text">4</span>
-            <span class="plain-text">0</span>
+            <span class="plain-text">6</span>
             <span class="plain-text">21</span>
             <span class="plain-text">7</span>
             <span class="plain-text">2</span>
@@ -183,7 +183,7 @@
 
     <div class="row">
         <div class="label">Avg missing</div>
-        <div class="data" id="frequency">
+        <div class="data" id="avg-missing">
             <span class="plain-text">9</span>
             <span class="plain-text">8</span>
             <span class="plain-text">6</span>
@@ -199,7 +199,7 @@
 
     <div class="row">
         <div class="label">Frequency</div>
-        <div class="data">
+        <div class="data" id="frequency">
             <span class="plain-text">9</span>
             <span class="plain-text">13</span>
             <span class="plain-text">14</span>
@@ -293,7 +293,7 @@
   <script src="/js/client.js"></script>
   <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
   <script src="/js/trx1.js"></script>
-  <script>
+  <!-- <script>
     // Array of possible values
     const avgMissingValues = [9, 8, 6, 11, 13, 6, 7, 9, 8];
     const frequencyValues = [9, 13, 14, 8, 8, 9, 14, 9, 7, 9];
@@ -320,7 +320,7 @@
     
     // Update values every minute (60000 milliseconds)
     setInterval(updateValues, 60000);
-</script>
+</script> -->
 <script>
 
 
@@ -349,94 +349,232 @@
 <script>
     let previousX = null;
     let previousY = null;
+socket.on('data-server-trx-chart', function (data) {
+    const a=data.data[0].result
+     const missingDataSpans = document.querySelectorAll('#missing-data .plain-text');
 
-    socket.on('data-server-trx-chart', function (data) {
-        console.log("as......", data);
-        const dataArray = data.data;
+// Iterate over each span
+missingDataSpans.forEach((span, index) => {
+    if (index === a) {
+        span.textContent = '0'; // Set to 0 where the index matches the result number
+    } else {
+        // Randomly change the value if it's not 0 and doesn't match the result number
+        span.textContent = Math.floor(Math.random() * 25) + 1;
+    }
+});
+    // const resultNumber = data.result;
+    // console.log("result....number....",resultNumber)
 
-        // Clear previous data
-        const trxDataList = document.getElementById('trx-data-list1');
-        trxDataList.innerHTML = '';
+    // Update the Missing row
+    
 
-        // Clear previous SVG lines
-        const svg = document.getElementById('line-connector');
-        svg.innerHTML = '';
+    const dataArray = data.data;
 
-        // Iterate over the array and create list items
-        dataArray.forEach(item => {
-            const isBig = item.bigsmall === 'big';
-            const resultValue = isBig ? 'B' : 'S';
-            const resultNumber = parseInt(item.result, 10);
+    // Clear previous data
+    const trxDataList = document.getElementById('trx-data-list1');
+    trxDataList.innerHTML = '';
 
-            // Create list item with inline styles
-            const li = document.createElement('li');
-            li.style.marginBottom = '10px';
+    // Clear previous SVG lines
+    const svg = document.getElementById('line-connector');
+    svg.innerHTML = '';
 
-            // Construct HTML content for the list item with inline styles
-            let numbersHtml = '';
-            for (let i = 0; i <= 9; i++) {
-                const isMatching = i === resultNumber;
-                const numberStyle = `
-                    display: inline-block;
-                    width: 20px;
-                    height: 20px;
-                    line-height: 20px;
-                    text-align: center;
-                    border-radius: 50%;
-                    background-color: ${isMatching ? '#dc3545' : 'transparent'};
-                    color: ${isMatching ? 'white' : 'black'};
-                    font-size: 14px;
-                    margin-right: 5px;
-                    position: relative;
-                `;
-                numbersHtml += `<span style="${numberStyle}" data-index="${i}">${i}</span>`;
-            }
+    // Variables to store previous coordinates for line drawing
+    let previousX = null;
+    let previousY = null;
 
-            li.innerHTML = `
-                <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0;">
-                    <div class="van-col van-col--18" style="flex: 1; color:black;">
-                        ${item.period}
-                    </div>
-                    <div class="van-col van-col--60" style="flex: 4; display: flex; justify-content: space-between; padding-left: 10px;">
-                        ${numbersHtml}
-                    </div>
-                    <div class="van-col van-col--6" style="flex: 1; color:black; text-align: right;">
-                        ${resultValue}
-                    </div>
-                </div>
-                <hr style="margin: 10px 0;"> <!-- Line separator -->
+    // Iterate over the array and create list items
+    dataArray.forEach(item => {
+        const isBig = item.bigsmall === 'big';
+        const resultValue = isBig ? 'B' : 'S';
+        const resultNumber = parseInt(item.result, 10);
+//         const missingDataSpans = document.querySelectorAll('#missing-data .plain-text');
+
+// // Iterate over each span
+// missingDataSpans.forEach((span, index) => {
+//     if (index === a) {
+//         span.textContent = '0'; // Set to 0 where the index matches the result number
+//     } else {
+//         // Randomly change the value if it's not 0 and doesn't match the result number
+//         span.textContent = Math.floor(Math.random() * 25) + 1;
+//     }
+// });
+
+        // Create list item with inline styles
+        const li = document.createElement('li');
+        li.style.marginBottom = '10px';
+
+        // Construct HTML content for the list item with inline styles
+        let numbersHtml = '';
+        for (let i = 0; i <= 9; i++) {
+            const isMatching = i === resultNumber;
+            const numberStyle = `
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                background-color: ${isMatching ? '#dc3545' : 'transparent'};
+                color: ${isMatching ? 'white' : 'black'};
+                font-size: 14px;
+                margin-right: 5px;
+                position: relative;
             `;
+            numbersHtml += `<span style="${numberStyle}" data-index="${i}">${i}</span>`;
+        }
 
-            // Append the list item to the UL
-            trxDataList.appendChild(li);
+        li.innerHTML = `
+            <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0;">
+                <div class="van-col van-col--18" style="flex: 1; color:black;">
+                    ${item.period}
+                </div>
+                <div class="van-col van-col--60" style="flex: 4; display: flex; justify-content: space-between; padding-left: 10px;">
+                    ${numbersHtml}
+                </div>
+                <div class="van-col van-col--6" style="flex: 1; color:black; text-align: right;">
+                    ${resultValue}
+                </div>
+            </div>
+            <hr style="margin: 10px 0;"> <!-- Line separator -->
+        `;
 
-            // Draw the line connecting the previous and current result
-            const currentResultElement = li.querySelector(`[data-index="${resultNumber}"]`);
-            const currentX = currentResultElement.offsetLeft + currentResultElement.offsetWidth / 2;
-            const currentY = currentResultElement.offsetTop + currentResultElement.offsetHeight / 2 + trxDataList.scrollTop;
+        // Append the list item to the UL
+        trxDataList.appendChild(li);
 
-            // Draw a line only if previous coordinates exist
-            if (previousX !== null && previousY !== null) {
-                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                line.setAttribute("x1", previousX);
-                line.setAttribute("y1", previousY);
-                line.setAttribute("x2", currentX);
-                line.setAttribute("y2", currentY);
-                line.setAttribute("stroke", "black");
-                line.setAttribute("stroke-width", "2");
-                svg.appendChild(line);
-            }
+        // Draw the line connecting the previous and current result
+        const currentResultElement = li.querySelector(`[data-index="${resultNumber}"]`);
+        const currentX = currentResultElement.offsetLeft + currentResultElement.offsetWidth / 2;
+        const currentY = currentResultElement.offsetTop + currentResultElement.offsetHeight / 2 + trxDataList.scrollTop;
 
-            // Update previous coordinates for next line drawing
-            previousX = currentX;
-            previousY = currentY;
-        });
+        // Draw a line only if previous coordinates exist
+        if (previousX !== null && previousY !== null) {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", previousX);
+            line.setAttribute("y1", previousY);
+            line.setAttribute("x2", currentX);
+            line.setAttribute("y2", currentY);
+            line.setAttribute("stroke", "black");
+            line.setAttribute("stroke-width", "2");
+            svg.appendChild(line);
+        }
 
-        // Reset previous coordinates after processing current batch of data
-        previousX = null;
-        previousY = null;
+        // Update previous coordinates for next line drawing
+        previousX = currentX;
+        previousY = currentY;
     });
-</script>
+
+    // Reset previous coordinates after processing current batch of data
+    previousX = null;
+    previousY = null;
+});
+
+//     socket.on('data-server-trx-chart', function (data) {
+//         console.log("as......", data);
+//         const resultNumber = parseInt(data.result, 10);
+//         document.querySelectorAll('.circle').forEach((circle, index) => {
+//             if (index === resultNumber) {
+//                 circle.classList.add('highlight');
+//             } else {
+//                 circle.classList.remove('highlight');
+//             }
+//         });
+
+//         // Update the Missing row
+//         const missingDataSpans = document.querySelectorAll('#missing-data .plain-text');
+//         missingDataSpans.forEach((span, index) => {
+//             if (index === resultNumber) {
+//                 span.textContent = '0'; // Set to 0 where the index matches the result number
+//             } else if (span.textContent === '0') {
+//                 // Optionally, if you want to re-randomize other non-matching indexes, you can uncomment the next line
+//                 // span.textContent = Math.floor(Math.random() * 25) + 1;
+//             }
+//         });
+
+//         const dataArray = data.data;
+
+//         // Clear previous data
+//         const trxDataList = document.getElementById('trx-data-list1');
+//         trxDataList.innerHTML = '';
+
+//         // Clear previous SVG lines
+//         const svg = document.getElementById('line-connector');
+//         svg.innerHTML = '';
+
+//         // Iterate over the array and create list items
+//         dataArray.forEach(item => {
+//             const isBig = item.bigsmall === 'big';
+//             const resultValue = isBig ? 'B' : 'S';
+//             const resultNumber = parseInt(item.result, 10);
+
+//             // Create list item with inline styles
+//             const li = document.createElement('li');
+//             li.style.marginBottom = '10px';
+
+//             // Construct HTML content for the list item with inline styles
+//             let numbersHtml = '';
+//             for (let i = 0; i <= 9; i++) {
+//                 const isMatching = i === resultNumber;
+//                 const numberStyle = `
+//                     display: inline-block;
+//                     width: 20px;
+//                     height: 20px;
+//                     line-height: 20px;
+//                     text-align: center;
+//                     border-radius: 50%;
+//                     background-color: ${isMatching ? '#dc3545' : 'transparent'};
+//                     color: ${isMatching ? 'white' : 'black'};
+//                     font-size: 14px;
+//                     margin-right: 5px;
+//                     position: relative;
+//                 `;
+//                 numbersHtml += `<span style="${numberStyle}" data-index="${i}">${i}</span>`;
+//             }
+
+//             li.innerHTML = `
+//                 <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0;">
+//                     <div class="van-col van-col--18" style="flex: 1; color:black;">
+//                         ${item.period}
+//                     </div>
+//                     <div class="van-col van-col--60" style="flex: 4; display: flex; justify-content: space-between; padding-left: 10px;">
+//                         ${numbersHtml}
+//                     </div>
+//                     <div class="van-col van-col--6" style="flex: 1; color:black; text-align: right;">
+//                         ${resultValue}
+//                     </div>
+//                 </div>
+//                 <hr style="margin: 10px 0;"> <!-- Line separator -->
+//             `;
+
+//             // Append the list item to the UL
+//             trxDataList.appendChild(li);
+
+//             // Draw the line connecting the previous and current result
+//             const currentResultElement = li.querySelector(`[data-index="${resultNumber}"]`);
+//             const currentX = currentResultElement.offsetLeft + currentResultElement.offsetWidth / 2;
+//             const currentY = currentResultElement.offsetTop + currentResultElement.offsetHeight / 2 + trxDataList.scrollTop;
+
+//             // Draw a line only if previous coordinates exist
+//             if (previousX !== null && previousY !== null) {
+//                 const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+//                 line.setAttribute("x1", previousX);
+//                 line.setAttribute("y1", previousY);
+//                 line.setAttribute("x2", currentX);
+//                 line.setAttribute("y2", currentY);
+//                 line.setAttribute("stroke", "black");
+//                 line.setAttribute("stroke-width", "2");
+//                 svg.appendChild(line);
+//             }
+
+//             // Update previous coordinates for next line drawing
+//             previousX = currentX;
+//             previousY = currentY;
+//         });
+
+//         // Reset previous coordinates after processing current batch of data
+//         previousX = null;
+//         previousY = null;
+//     });
+// </script>
 
 <!-- Add this SVG container in your HTML to hold the lines -->
 <svg id="line-connector" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></svg>
@@ -444,24 +582,3 @@
 
 <!-- Add this SVG container in your HTML to hold the lines -->
 <svg id="line-connector" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></svg>
-<script>
-    socket.on('updateNumbers', data => {
-        const { winningNumber, missingNumbers } = data;
-
-        // Highlight the winning number
-        document.querySelectorAll('.circle').forEach((circle, index) => {
-            if (index === winningNumber) {
-                circle.classList.add('highlight');
-            } else {
-                circle.classList.remove('highlight');
-            }
-        });
-
-        // Update missing numbers
-        const avgMissingContainer = document.getElementById('avg-missing');
-        avgMissingContainer.querySelectorAll('.plain-text').forEach((span, index) => {
-            span.textContent = missingNumbers[index];
-        });
-    });
-</script>
-  

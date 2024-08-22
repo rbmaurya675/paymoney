@@ -601,29 +601,6 @@ cron.schedule('*/1 * * * *', () => {
     io.emit('updateValues', { avgMissing: avgMissingRandom, frequency: frequencyRandom });
 });
 
-const winningNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-function getRandomMissingNumbers(winningNumber) {
-    const missingNumbers = [];
-    for (let i = 0; i < 10; i++) {
-        if (i === winningNumber) {
-            missingNumbers.push(0); // Ensure the matching winning number has missing value 0
-        } else {
-            missingNumbers.push(Math.floor(Math.random() * 25) + 1); // Random value between 1 and 25
-        }
-    }
-    return missingNumbers;
-}
-
-// Cron job to emit updated values every minute
-cron.schedule('*/1 * * * *', () => {
-    const winningNumber = winningNumbers[Math.floor(Math.random() * winningNumbers.length)];
-    const missingNumbers = getRandomMissingNumbers(winningNumber);
-
-    io.emit('updateNumbers', { winningNumber, missingNumbers });
-});
-
-
     // close
      cron.schedule('* * 0 * * *', async() => {
          await connection.execute('UPDATE users SET roses_today = ?', [0]);
