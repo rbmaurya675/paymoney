@@ -408,6 +408,24 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
           });
         // console.log("trxdata...", trxdata)
         io.emit('data-server-trx-chart', { data: singletrxdatachart });
+        const [threetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
+        const threetrxdatachart = threetrxgetDatachart.map(items => {
+            return items;
+          });
+        // console.log("trxdata...", trxdata)
+        io.emit('data-server-trx-three-chart', { data: threetrxdatachart });
+        const [fivetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 3 ORDER BY id DESC LIMIT 10', []);
+        const fivetrxdatachart = fivetrxgetDatachart.map(items => {
+            return items;
+          });
+        // console.log("trxdata...", trxdata)
+        io.emit('data-server-trx-five-chart', { data: fivetrxdatachart });
+        const [tentrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 4 ORDER BY id DESC LIMIT 10', []);
+        const tentrxdatachart = tentrxgetDatachart.map(items => {
+            return items;
+          });
+        // console.log("trxdata...", trxdata)
+        io.emit('data-server-trx-ten-chart', { data: tentrxdatachart });
         const [threetrxgetData] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
         const threetrxdata = threetrxgetData.map(items => {
             // Update hash to show only the last 6 characters
