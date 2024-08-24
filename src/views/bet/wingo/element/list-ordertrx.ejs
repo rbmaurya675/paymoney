@@ -337,8 +337,6 @@
     setInterval(updateValues, 60000);
 </script> -->
 <script>
-
-
     socket.on('updateValues', data => {
         const { avgMissing, frequency } = data;
         
@@ -360,7 +358,7 @@
         window.location.href = url;
     }
   </script>
-<script>
+<!-- <script>
     console.log("b............")
     $(document).ready(function () {
     const socket = io();
@@ -389,7 +387,7 @@ console.log("a.........j")
     });
 });
 
-</script>
+</script> -->
 
 <script>
     $(document).ready(function () {
