@@ -614,7 +614,7 @@ function getRandomValues(values) {
 cron.schedule('*/1 * * * *', () => {
     const avgMissingRandom = getRandomValues(avgMissingValues);
     const frequencyRandom = getRandomValues(frequencyValues);
-
+console.log("average missingfrom crome josb...",avgMissingRandom)
     // Emit the updated values to all connected clients
     io.emit('updateValues', { avgMissing: avgMissingRandom, frequency: frequencyRandom });
 });

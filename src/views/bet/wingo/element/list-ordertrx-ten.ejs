@@ -336,7 +336,7 @@
 </script> -->
 <script>
 
-
+$(document).ready(function () {
     socket.on('updateValues', data => {
         const { avgMissing, frequency } = data;
         
@@ -351,6 +351,7 @@
             span.textContent = frequency[index];
         });
     });
+})
 </script>
   <script>
     // Function to handle the image click

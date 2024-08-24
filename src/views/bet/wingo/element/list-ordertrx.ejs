@@ -336,58 +336,13 @@
     // Update values every minute (60000 milliseconds)
     setInterval(updateValues, 60000);
 </script> -->
-<script>
-    socket.on('updateValues', data => {
-        const { avgMissing, frequency } = data;
-        
-        const avgMissingContainer = document.getElementById('avg-missing');
-        const frequencyContainer = document.getElementById('frequency');
-        
-        avgMissingContainer.querySelectorAll('.plain-text').forEach((span, index) => {
-            span.textContent = avgMissing[index];
-        });
 
-        frequencyContainer.querySelectorAll('.plain-text').forEach((span, index) => {
-            span.textContent = frequency[index];
-        });
-    });
-</script>
   <script>
     // Function to handle the image click
     function openUrl(url) {
         window.location.href = url;
     }
   </script>
-<!-- <script>
-    console.log("b............")
-    $(document).ready(function () {
-    const socket = io();
-
-    // Listen for the 'data-server-trx-three-chart' event
-    socket.on('data-server-trx-chart', function (data) {
-        const trxData = data.data;
-console.log("a.........j")
-        // Clear existing data
-        $('#trx-data-list1').empty();
-
-        // Iterate over the received data and append it to the UI
-        trxData.forEach(item => {
-            const listItem = `
-                <div class="c-tc van-row">
-                    <div class="van-col van-col--12" style="background-color: brown; color: white; height: 40px;margin-top: 15px; padding-top: 15px;">${item.period}</div>
-                    <div class="van-col van-col--12" style="background-color: brown; color: white;height: 40px;margin-top: 15px; padding-top: 15px;">${item.result}</div>
-                </div>
-            `;
-
-            $('#trx-data-list1').append(listItem);
-        });
-
-        // Show the data container if it's hidden
-        $('#chartData').show();
-    });
-});
-
-</script> -->
 
 <script>
     $(document).ready(function () {
@@ -501,3 +456,22 @@ console.log("a.........j")
     });
     </script>
 <svg id="line-connector" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></svg> 
+<script>
+    $(document).ready(function () {
+    console.log("asd....")
+    socket.on('updateValues', data => {
+        const { avgMissing, frequency } = data;
+        
+        const avgMissingContainer = document.getElementById('avg-missing');
+        const frequencyContainer = document.getElementById('frequency');
+        
+        avgMissingContainer.querySelectorAll('.plain-text').forEach((span, index) => {
+            span.textContent = avgMissing[index];
+        });
+
+        frequencyContainer.querySelectorAll('.plain-text').forEach((span, index) => {
+            span.textContent = frequency[index];
+        });
+    });
+})
+</script>
