@@ -412,7 +412,7 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
         const threetrxdatachart = threetrxgetDatachart.map(items => {
             return items;
           });
-        // console.log("trxdata...", trxdata)
+        // console.log("trxdata...", threetrxdatachart)
         io.emit('data-server-trx-three-chart', { data: threetrxdatachart });
         const [fivetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 3 ORDER BY id DESC LIMIT 10', []);
         const fivetrxdatachart = fivetrxgetDatachart.map(items => {
