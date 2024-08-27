@@ -335,7 +335,6 @@
     setInterval(updateValues, 60000);
 </script> -->
 <script>
-
 $(document).ready(function () {
     socket.on('updateValues', data => {
         const { avgMissing, frequency } = data;

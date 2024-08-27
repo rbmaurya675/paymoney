@@ -402,6 +402,7 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
           });
         // console.log("trxdata...", trxdata)
         io.emit('data-server-trx', { data: singletrxdata });
+        
         const [singletrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
         const singletrxdatachart = singletrxgetDatachart.map(items => {
             return items;
@@ -611,12 +612,18 @@ function getRandomValues(values) {
 }
 
 // Cron job to emit updated values every minute
-cron.schedule('*/1 * * * *', () => {
+cron.schedule('*/1 * * * *', async() => {
     const avgMissingRandom = getRandomValues(avgMissingValues);
     const frequencyRandom = getRandomValues(frequencyValues);
 console.log("average missingfrom crome josb...",avgMissingRandom)
     // Emit the updated values to all connected clients
     io.emit('updateValues', { avgMissing: avgMissingRandom, frequency: frequencyRandom });
+    const [alltrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC', []);
+        const alltrxdatachart = alltrxgetDatachart.map(items => {
+            return items;
+          });
+        // console.log("trxdata...", trxdata)
+        io.emit('data-server-trx-chartall', { data: alltrxdatachart });
 });
 
     // close
