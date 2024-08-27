@@ -665,7 +665,6 @@ function showListOrder3(list_orders, x) {
   });
   
   function showListOrder(list_orders, x) {
-    console.log("show list order function ....",list_orders)
     if (list_orders.length == 0) {
       return $(`.game-list .con-box:eq(${x}) #trx-data-list`).html(
         `
@@ -940,7 +939,6 @@ function showListOrder3(list_orders, x) {
     dataType: "json",
     success: function (response) {
       let list_orders = response.data.gameslist;
-      console.log("list_orders.....",list_orders)
       $(".time-box .info .table1").html(response.table1);
       $(".time-box .info .table2").html(response.table2);
       $(".time-box .info .table3").html(response.table3);

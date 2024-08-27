@@ -543,9 +543,7 @@
 
         socket.on('data-server-trx-chartall', function (data) {
             trxData = data.data;
-            console.log("trxData....", trxData);
             totalPages = Math.ceil(trxData.length / itemsPerPage);
-            console.log("totalpages...", totalPages);
 
             currentPage = 1; // Initialize to display the first page of data
             updatePageIndicator();

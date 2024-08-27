@@ -386,6 +386,28 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
         }
     })
     // display data 
+    cron.schedule('*/9 * * * * *',async()=>{
+        const [singletrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
+        const singletrxdatachart = singletrxgetDatachart.map(items => {
+            return items;
+          });
+        io.emit('data-server-trx-chart', { data: singletrxdatachart });
+        const [threetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
+        const threetrxdatachart = threetrxgetDatachart.map(items => {
+            return items;
+          });
+        io.emit('data-server-trx-three-chart', { data: threetrxdatachart });
+        const [fivetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 3 ORDER BY id DESC LIMIT 10', []);
+        const fivetrxdatachart = fivetrxgetDatachart.map(items => {
+            return items;
+          });
+        io.emit('data-server-trx-five-chart', { data: fivetrxdatachart });
+        const [tentrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 4 ORDER BY id DESC LIMIT 10', []);
+        const tentrxdatachart = tentrxgetDatachart.map(items => {
+            return items;
+          });
+        io.emit('data-server-trx-ten-chart', { data: tentrxdatachart });
+    })
     cron.schedule('*/2 * * * * *', async () => {
         
         const [singletrxgetData] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
@@ -400,33 +422,28 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
             // Return the modified item
             return items;
           });
-        // console.log("trxdata...", trxdata)
         io.emit('data-server-trx', { data: singletrxdata });
         
-        const [singletrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
-        const singletrxdatachart = singletrxgetDatachart.map(items => {
-            return items;
-          });
-        // console.log("trxdata...", trxdata)
-        io.emit('data-server-trx-chart', { data: singletrxdatachart });
-        const [threetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
-        const threetrxdatachart = threetrxgetDatachart.map(items => {
-            return items;
-          });
-        // console.log("trxdata...", threetrxdatachart)
-        io.emit('data-server-trx-three-chart', { data: threetrxdatachart });
-        const [fivetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 3 ORDER BY id DESC LIMIT 10', []);
-        const fivetrxdatachart = fivetrxgetDatachart.map(items => {
-            return items;
-          });
-        // console.log("trxdata...", trxdata)
-        io.emit('data-server-trx-five-chart', { data: fivetrxdatachart });
-        const [tentrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 4 ORDER BY id DESC LIMIT 10', []);
-        const tentrxdatachart = tentrxgetDatachart.map(items => {
-            return items;
-          });
-        // console.log("trxdata...", trxdata)
-        io.emit('data-server-trx-ten-chart', { data: tentrxdatachart });
+        // const [singletrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
+        // const singletrxdatachart = singletrxgetDatachart.map(items => {
+        //     return items;
+        //   });
+        // io.emit('data-server-trx-chart', { data: singletrxdatachart });
+        // const [threetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
+        // const threetrxdatachart = threetrxgetDatachart.map(items => {
+        //     return items;
+        //   });
+        // io.emit('data-server-trx-three-chart', { data: threetrxdatachart });
+        // const [fivetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 3 ORDER BY id DESC LIMIT 10', []);
+        // const fivetrxdatachart = fivetrxgetDatachart.map(items => {
+        //     return items;
+        //   });
+        // io.emit('data-server-trx-five-chart', { data: fivetrxdatachart });
+        // const [tentrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 4 ORDER BY id DESC LIMIT 10', []);
+        // const tentrxdatachart = tentrxgetDatachart.map(items => {
+        //     return items;
+        //   });
+        // io.emit('data-server-trx-ten-chart', { data: tentrxdatachart });
         const [threetrxgetData] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
         const threetrxdata = threetrxgetData.map(items => {
             // Update hash to show only the last 6 characters
@@ -622,25 +639,21 @@ console.log("average missingfrom crome josb...",avgMissingRandom)
         const alltrxdatachart = alltrxgetDatachart.map(items => {
             return items;
           });
-        // console.log("trxdata...", trxdata)
         io.emit('data-server-trx-chartall', { data: alltrxdatachart });
         const [allthreetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC', []);
         const allthreetrxdatachart = allthreetrxgetDatachart.map(items => {
             return items;
           });
-        // console.log("trxdata...", trxdata)
         io.emit('data-server-trx-three-chartall', { data: allthreetrxdatachart });
         const [alltfivetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 3 ORDER BY id DESC', []);
         const alltfivetrxdatachart = alltfivetrxgetDatachart.map(items => {
             return items;
           });
-        // console.log("trxdata...", trxdata)
         io.emit('data-server-trx-five-chartall', { data: alltfivetrxdatachart });
         const [alltentrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 4 ORDER BY id DESC', []);
         const alltentrxdatachart = alltentrxgetDatachart.map(items => {
             return items;
           });
-        // console.log("trxdata...", trxdata)
         io.emit('data-server-trx-ten-chartall', { data: alltentrxdatachart });
 });
 
