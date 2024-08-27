@@ -216,124 +216,33 @@
     <ul style="color: red" id="trx-data-list1">
     </ul>
     <div data-v-a9660e98="" class="page-nav c-row c-row-center c-tc">
+        <div data-v-a9660e98="" class="arr c-row c-row-middle-center" onclick="handleLeftClick()">
+            <i data-v-a9660e98="" class="van-icon van-icon-arrow-left icon" style="font-size: 20px">
+            </i>
+        </div>
+        <div data-v-a9660e98="" class="number1" id="page-indicator">1/1</div>
+        <div data-v-a9660e98="" class="arr c-row c-row-middle-center" onclick="handleRightClick()">
+            <i data-v-a9660e98="" class="van-icon van-icon-arrow icon action" style="font-size: 20px">
+            </i>
+        </div>
+    </div>
+    <!-- <div data-v-a9660e98="" class="page-nav c-row c-row-center c-tc">
         <div data-v-a9660e98="" class="arr c-row c-row-middle-center">
             <i data-v-a9660e98="" class="van-icon van-icon-arrow-left icon" style="font-size: 20px">
-                <!---->
             </i>
         </div>
         <div data-v-a9660e98="" class="number"></div>
         <div data-v-a9660e98="" class="arr c-row c-row-middle-center action">
             <i data-v-a9660e98="" class="van-icon van-icon-arrow icon action" style="font-size: 20px">
-                <!---->
             </i>
         </div>
-    </div>
+    </div> -->
 </div>
-<!-- <script>
-    socket.on('data-server-trx', function (data) {
-      // console.log('Received data:', data);
-  
-      // Assuming data is an array of objects
-      const dataArray = data.data;
-  
-      // Clear previous data
-      const trxDataList = document.getElementsByClassName('hb');
-      trxDataList.innerHTML = '';
-  
-      // Iterate over the array and create list items
-      dataArray.forEach(item => {
-        // Format the hash to include ***
-        const formattedHash = `***${item.hash.slice(-4)}`;
-  
-        // Format the period as required
-        const formattedPeriod = `202**${item.period.toString().slice(-4)}`;
-  
-        // Determine if result is big or small
-        const isBig = item.bigsmall === 'big';
-        const resultValue = isBig ? 'B' : 'S';
-  
-        // Create circular badge style for result
-        const resultStyle = `
-                display: inline-block;
-                width: 20px;
-                height: 20px;
-                line-height: 20px;
-                text-align: center;
-                border-radius: 50%;
-                background-color: ${isBig ? '#28a745' : '#dc3545'}; /* Green for big, Red for small */
-                color: white;
-                font-size: 14px;
-            `;
-  
-        // Create list item with inline styles
-        const li = document.createElement('li');
-        li.style.marginBottom = '10px'; // Example inline style
-  
-        // Construct HTML content for the list item with inline styles
-        li.innerHTML = `
-          <div class="wrap" style="display: flex; justify-content: space-between; padding: 8px 0;">
-            <div class="c-tc van-row" style="display: flex; flex-wrap: nowrap;">
-              <div class="van-col van-col--6" style="padding-right: 10px; padding-left: 10px; color:black; padding-top: 25px;">
-                ${formattedPeriod}
-              </div>
-              <div class="van-col van-col--5" style="padding-right: 10px; padding-left: 10px; color:black;">
-              
-                <img src="/images/a.png" alt="Clickable Image" style="cursor: pointer;" style="width:35%" onclick="openUrl('https://tronscan.org/#/block/${item.block}')" />
-                ${item.block}
-              </div>
-              <div class="van-col van-col--5" style="padding-right: 10px; padding-left: 10px; color:black; padding-top: 25px;">
-                ${item.time}
-              </div>
-              <div class="van-col van-col--4" style="padding-right: 10px; padding-left: 10px; color:black; padding-top: 25px;">
-                ${formattedHash}
-              </div>
-              <div class="van-col van-col--4" style="padding-right: 10px; padding-left: 10px; color:black; padding-top: 25px;">
-                <span style="${resultStyle}">${item.result}</span>
-              </div>
-              <div class="van-col van-col--2" style="padding-right: 10px; color:black; padding-top: 25px;">
-                ${resultValue}
-              </div>
-            </div>
-          </div>
-        `;
-  
-        // Append the list item to the UL
-        trxDataList.appendChild(li);
-      });
-    });
-  </script> -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="/js/client.js"></script>
   <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
-  <!-- <script src="/js/trx1.js"></script> -->
-  <!-- <script>
-    // Array of possible values
-    const avgMissingValues = [9, 8, 6, 11, 13, 6, 7, 9, 8];
-    const frequencyValues = [9, 13, 14, 8, 8, 9, 14, 9, 7, 9];
 
-    function updateValues() {
-        const avgMissingContainer = document.getElementById('avg-missing');
-        const frequencyContainer = document.getElementById('frequency');
-        
-        // Update Avg missing values randomly
-        avgMissingContainer.querySelectorAll('.plain-text').forEach(span => {
-            const randomIndex = Math.floor(Math.random() * avgMissingValues.length);
-            span.textContent = avgMissingValues[randomIndex];
-        });
-
-        // Update Frequency values randomly
-        frequencyContainer.querySelectorAll('.plain-text').forEach(span => {
-            const randomIndex = Math.floor(Math.random() * frequencyValues.length);
-            span.textContent = frequencyValues[randomIndex];
-        });
-    }
-
-    // Initial call
-    updateValues();
-    
-    // Update values every minute (60000 milliseconds)
-    setInterval(updateValues, 60000);
-</script> -->
 <script>
 
 $(document).ready(function () {
@@ -472,3 +381,103 @@ $(document).ready(function () {
     });
     </script>
 <svg id="line-connector" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></svg> 
+<script>
+    const itemsPerPage = 10;
+    let currentPage = 1;
+    let totalPages = 1;
+    let trxData = [];
+
+    $(document).ready(function () {
+        const socket = io();
+
+        socket.on('data-server-trx-five-chartall', function (data) {
+            trxData = data.data;
+            // console.log("trxData...1.", trxData);
+            totalPages = Math.ceil(trxData.length / itemsPerPage);
+            // console.log("totalpages...", totalPages);
+
+            currentPage = 1; // Initialize to display the first page of data
+            updatePageIndicator();
+            displayPage(currentPage);
+        });
+    });
+
+    function updatePageIndicator() {
+        document.getElementById('page-indicator').innerText = `${currentPage}/${totalPages}`;
+    }
+
+    function displayPage(page) {
+        // Clear previous data
+        const trxDataList = $('#trx-data-list1');
+        trxDataList.empty();
+
+        // Slice the data for the current page
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const pageData = trxData.slice(startIndex, endIndex);
+
+        // Iterate over the array and create list items
+        pageData.forEach(item => {
+            const isBig = item.bigsmall === 'big';
+            const resultValue = isBig ? 'B' : 'S';
+            const resultNumber = parseInt(item.result, 10);
+
+            // Create list item with inline styles
+            let numbersHtml = '';
+            for (let i = 0; i <= 9; i++) {
+                const isMatching = i === resultNumber;
+                const numberStyle = `
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    border-radius: 50%;
+                    background-color: ${isMatching ? '#dc3545' : 'transparent'};
+                    color: ${isMatching ? 'white' : 'black'};
+                    font-size: 14px;
+                    margin-right: 5px;
+                    position: relative;
+                `;
+                numbersHtml += `<span style="${numberStyle}" data-index="${i}">${i}</span>`;
+            }
+
+            const listItem = `
+                <li style="margin-bottom: 10px;">
+                    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0;">
+                        <div class="van-col van-col--18" style="flex: 1; color:black;">
+                            ${item.period}
+                        </div>
+                        <div class="van-col van-col--60" style="flex: 4; display: flex; justify-content: space-between; padding-left: 10px;">
+                            ${numbersHtml}
+                        </div>
+                        <div class="van-col van-col--6" style="flex: 1; color:black; text-align: right;">
+                            ${resultValue}
+                        </div>
+                    </div>
+                    <hr style="margin: 10px 0;">
+                </li>
+            `;
+
+            trxDataList.append(listItem);
+        });
+    }
+
+    function handleLeftClick() {
+        if (currentPage > 1) {
+            currentPage--;
+            updatePageIndicator();
+            displayPage(currentPage);
+        }
+        console.log('Left button clicked, new page:', currentPage);
+    }
+
+    function handleRightClick() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            updatePageIndicator();
+            displayPage(currentPage);
+        }
+        console.log('Right button clicked, new page:', currentPage);
+    }
+</script>

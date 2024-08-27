@@ -624,6 +624,24 @@ console.log("average missingfrom crome josb...",avgMissingRandom)
           });
         // console.log("trxdata...", trxdata)
         io.emit('data-server-trx-chartall', { data: alltrxdatachart });
+        const [allthreetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC', []);
+        const allthreetrxdatachart = allthreetrxgetDatachart.map(items => {
+            return items;
+          });
+        // console.log("trxdata...", trxdata)
+        io.emit('data-server-trx-three-chartall', { data: allthreetrxdatachart });
+        const [alltfivetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 3 ORDER BY id DESC', []);
+        const alltfivetrxdatachart = alltfivetrxgetDatachart.map(items => {
+            return items;
+          });
+        // console.log("trxdata...", trxdata)
+        io.emit('data-server-trx-five-chartall', { data: alltfivetrxdatachart });
+        const [alltentrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 4 ORDER BY id DESC', []);
+        const alltentrxdatachart = alltentrxgetDatachart.map(items => {
+            return items;
+          });
+        // console.log("trxdata...", trxdata)
+        io.emit('data-server-trx-ten-chartall', { data: alltentrxdatachart });
 });
 
     // close
