@@ -704,19 +704,19 @@ const trxbetWinGo = async (req, res) => {
     const periodid = Number(id);
 //
 const [periodDatafromDatabase] = await connection.execute('SELECT period FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 1', []);
-            console.log("periodDatafrom database.......",periodDatafromDatabase)
+            // console.log("periodDatafrom database.......",periodDatafromDatabase)
             let periodfrom = periodDatafromDatabase[0].period;
                 // Convert the period to a number and add 1
                 const newPeriodfromdatabase = Number(periodfrom) + 1;
                 console.log("Updated period value:", newPeriodfromdatabase);
     const [periodDatafromDatabasefive] = await connection.execute('SELECT period FROM trx WHERE type = 3 ORDER BY id DESC LIMIT 1', []);
-    console.log("periodDatafrom database.......",periodDatafromDatabasefive)
+    // console.log("periodDatafrom database.......",periodDatafromDatabasefive)
     let periodfromfive = periodDatafromDatabasefive[0].period;
         // Convert the period to a number and add 1
         const newPeriodfromdatabasefive = Number(periodfromfive) + 1;
         console.log("Updated period value:", newPeriodfromdatabasefive);
     const [periodDatafromDatabaseten] = await connection.execute('SELECT period FROM trx WHERE type = 4 ORDER BY id DESC LIMIT 1', []);
-    console.log("periodDatafrom database.......",periodDatafromDatabaseten)
+    // console.log("periodDatafrom database.......",periodDatafromDatabaseten)
     let periodfromten = periodDatafromDatabaseten[0].period;
         // Convert the period to a number and add 1
         const newPeriodfromdatabaseten = Number(periodfromten) + 1;

@@ -85,63 +85,19 @@ const cronJobGame1p = (io) => {
      });
 
     // trx wingo
-    const fetchLatestBlock = async (type, value) => {
-        // console.log("Entering fetchLatestBlock function...");
-        // console.log("value is....", value)
-        try {
-            const fetchDataQuery = `SELECT block+${value} as block FROM trx WHERE type=${type} ORDER BY block DESC LIMIT 1`;
-            // Execute query using await
-            const [rows, fields] = await connection.execute(fetchDataQuery);
-            if (rows.length > 0) {
-                const latestBlock = rows[0].block;
-                // console.log("Latest block fetched:", latestBlock);
-                return latestBlock;
-            } else {
-                // console.log("No blocks found in trx table.");
-                return null;
-            }
-        } catch (error) {
-            console.error('Error fetching latest block:', error);
-            throw error;
-        }
-    };
-    fetchLatestBlock()
-        .then(latestBlock => {
-            // console.log("Latest block:", latestBlock);
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
-
-// Function to generate a unique ID with 17 characters
 function generateUniqueID() {
-    // Get the current time in Asia/Kolkata time zone
     const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
     const date = new Date(now);
-    // console.log("date is ...",date)
-
-    // Get the full year
     const year = date.getFullYear().toString();
-
-    // Get the month (zero padded)
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
-
-    // Get the date (zero padded)
     const day = ('0' + date.getDate()).slice(-2);
 
     // Get the hours, minutes, and seconds
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
-
-    // Calculate the total minutes since midnight
     const totalMinutes = (hours * 60) + minutes+1;
-    // console.log("total minute is ....",totalMinutes)
-
-    // Convert total minutes and seconds to a zero-padded string
     const timePeriod = ('00000' + totalMinutes).slice(-5);
-
-    // Concatenate parts to form the unique ID
     const uniqueID = `${year}${month}${day}${timePeriod}`;
 
     return uniqueID;
@@ -152,7 +108,6 @@ console.log("Generated ID:", id);
     cron.schedule('*/1 * * * *', async () => {
         try {
             await winGoController.trxhandlingWinGo1P(1);
-            const latestBlock = await fetchLatestBlock(1, 20);
           
  const response = await axios.get(`https://apilist.tronscanapi.com/api/block?sort=-balance&start=0&limit=20&producer=&number=&start_timestamp=&end_timestamp=`, {
 });
@@ -200,17 +155,14 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
                 console.log('Data inserted:', results.insertId);
             });
         } catch (error) {
-            console.error('Error fetching data from API:', error);
+            console.error('Error fetching data from API:');
         }
     })
     cron.schedule('*/3 * * * *', async () => {
         try {
             await winGoController.trxhandlingWinGo1P(3);
-            const latestBlock = await fetchLatestBlock(1, 20);
             const [periodDatafromDatabase] = await connection.execute('SELECT period FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 1', []);
-            console.log("periodDatafrom database.......",periodDatafromDatabase)
             let period = periodDatafromDatabase[0].period;
-                // Convert the period to a number and add 1
                 const newPeriod = Number(period) + 1;
                 console.log("Updated period value:", newPeriod);
           
@@ -261,15 +213,13 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
                 console.log('Data inserted:', results.insertId);
             });
         } catch (error) {
-            console.error('Error fetching data from API:', error);
+            console.error('Error fetching data from API:');
         }
     })
     cron.schedule('*/5 * * * *', async () => {
         try {
             await winGoController.trxhandlingWinGo1P(5);
-            const latestBlock = await fetchLatestBlock(1, 20);
             const [periodDatafromDatabasefive] = await connection.execute('SELECT period FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 1', []);
-            console.log("periodDatafrom database.......",periodDatafromDatabasefive)
             let periodfive = periodDatafromDatabasefive[0].period;
                 // Convert the period to a number and add 1
                 const newPeriodfive = Number(periodfive) + 1;
@@ -321,17 +271,14 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
                 console.log('Data inserted:', results.insertId);
             });
         } catch (error) {
-            console.error('Error fetching data from API:', error);
+            console.error('Error fetching data from API:');
         }
     })
     cron.schedule('*/10 * * * *', async () => {
         try {
             await winGoController.trxhandlingWinGo1P(10);
-            const latestBlock = await fetchLatestBlock(1, 20);
             const [periodDatafromDatabaseten] = await connection.execute('SELECT period FROM trx WHERE type = 4 ORDER BY id DESC LIMIT 1', []);
-            console.log("periodDatafrom database.......",periodDatafromDatabaseten)
             let periodten = periodDatafromDatabaseten[0].period;
-                // Convert the period to a number and add 1
                 const newPeriodten = Number(periodten) + 1;
                 console.log("Updated period value:", newPeriodten);
           
@@ -382,11 +329,11 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
                 console.log('Data inserted:', results.insertId);
             });
         } catch (error) {
-            console.error('Error fetching data from API:', error);
+            console.error('Error fetching data from API:');
         }
     })
     // display data 
-    cron.schedule('*/9 * * * * *',async()=>{
+    cron.schedule('*/5 * * * * *',async()=>{
         const [singletrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
         const singletrxdatachart = singletrxgetDatachart.map(items => {
             return items;
@@ -408,7 +355,7 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
           });
         io.emit('data-server-trx-ten-chart', { data: tentrxdatachart });
     })
-    cron.schedule('*/2 * * * * *', async () => {
+    cron.schedule('*/4 * * * * *', async () => {
         
         const [singletrxgetData] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
         const singletrxdata = singletrxgetData.map(items => {
@@ -423,27 +370,6 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
             return items;
           });
         io.emit('data-server-trx', { data: singletrxdata });
-        
-        // const [singletrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC LIMIT 10', []);
-        // const singletrxdatachart = singletrxgetDatachart.map(items => {
-        //     return items;
-        //   });
-        // io.emit('data-server-trx-chart', { data: singletrxdatachart });
-        // const [threetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
-        // const threetrxdatachart = threetrxgetDatachart.map(items => {
-        //     return items;
-        //   });
-        // io.emit('data-server-trx-three-chart', { data: threetrxdatachart });
-        // const [fivetrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 3 ORDER BY id DESC LIMIT 10', []);
-        // const fivetrxdatachart = fivetrxgetDatachart.map(items => {
-        //     return items;
-        //   });
-        // io.emit('data-server-trx-five-chart', { data: fivetrxdatachart });
-        // const [tentrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 4 ORDER BY id DESC LIMIT 10', []);
-        // const tentrxdatachart = tentrxgetDatachart.map(items => {
-        //     return items;
-        //   });
-        // io.emit('data-server-trx-ten-chart', { data: tentrxdatachart });
         const [threetrxgetData] = await connection.execute('SELECT * FROM trx WHERE type = 2 ORDER BY id DESC LIMIT 10', []);
         const threetrxdata = threetrxgetData.map(items => {
             // Update hash to show only the last 6 characters
@@ -522,6 +448,9 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
     })
     // admin display data
     cron.schedule('*/1 * * * *', async () => {
+        const avgMissingRandom = getRandomValues(avgMissingValues);
+    const frequencyRandom = getRandomValues(frequencyValues);
+    io.emit('updateValues', { avgMissing: avgMissingRandom, frequency: frequencyRandom });
         try {
             console.log("enter con job for q....")
             const getLatestBlock = async () => {
@@ -552,7 +481,7 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
                 const secondIncrement = Math.floor(seconds / 3); // Increment value based on the given logic
                 let iterationCount = 0;
                 const totalIterations = 20;
-                const resultsHistory = []; // Array to store the last 5 results
+                const resultsHistory = []; 
                 const intervalId = setInterval(async () => {
                     iterationCount++;
                     currentBlock += 1;
@@ -574,9 +503,7 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
                         });
                         const data = response.data.data[0];
                         const block = data.number;
-                        // console.log("block details ....",block)
                         const hash = data.hash;
-                        // console.log("hash send data ...",hash)
                         function findLastIntegerDigit(hash) {
                             for (let i = hash.length - 1; i >= 0; i--) {
                                 if (!isNaN(hash[i]) && hash[i] !== ' ') {
@@ -586,7 +513,6 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
                             return null;
                         }
                         const  results= findLastIntegerDigit(hash);
-                        // const results = data.result;
                         const bigsmall = results <= 4 ? 'small' : 'big';
                         let blockData = {
                             block: block,
@@ -594,47 +520,36 @@ const formattedTime = time.replace(/(\d{2})\/(\d{2})\/(\d{4}),\s(\d{2}):(\d{2}):
                             result: results,
                             bigsmall: bigsmall
                         };
-                        // Add the new result to the history array
                         resultsHistory.push(blockData);
-                        // Keep only the last 5 results
                         if (resultsHistory.length > 10) {
                             resultsHistory.shift();
                         }
-                        io.emit('data-server-trx-three-secound', { data: resultsHistory }); // Emit the history of the last 5 results
-                        // console.log('Block:', blockData);
+                        io.emit('data-server-trx-three-secound', { data: resultsHistory });
                     } catch (error) {
-                        console.error('Error fetching block result:', error);
+                        console.error('Error fetching block result:.....');
                     }
                     if (iterationCount >= totalIterations) {
                         clearInterval(intervalId); // Clear the interval after 20 iterations
                         console.log('Completed 20 intervals, waiting for 60 seconds before fetching new data...');
-                        await delay(2000); // Wait for 60 seconds
-                        // performIncrementalOperation(); // Recursively call to restart the process
+                        await delay(2000); 
                     }
-                }, 3000); // Run every 2 seconds
+                }, 3000);
             };
             performIncrementalOperation();
         } catch (error) {
-            console.error('Error fetching data from API:', error);
+            console.error('Error fetching data from API:');
         }
     })
 
 // chart randar data display 
 const avgMissingValues = [9, 8, 6, 11, 13, 6, 7, 9, 8, 2];
 const frequencyValues = [9, 13, 14, 8, 8, 9, 14, 9, 7, 9];
-
-// Function to get random values
 function getRandomValues(values) {
     return values.map(() => values[Math.floor(Math.random() * values.length)]);
 }
 
 // Cron job to emit updated values every minute
-cron.schedule('*/1 * * * *', async() => {
-    const avgMissingRandom = getRandomValues(avgMissingValues);
-    const frequencyRandom = getRandomValues(frequencyValues);
-console.log("average missingfrom crome josb...",avgMissingRandom)
-    // Emit the updated values to all connected clients
-    io.emit('updateValues', { avgMissing: avgMissingRandom, frequency: frequencyRandom });
+cron.schedule('*/7 * * * * *', async() => {
     const [alltrxgetDatachart] = await connection.execute('SELECT * FROM trx WHERE type = 1 ORDER BY id DESC', []);
         const alltrxdatachart = alltrxgetDatachart.map(items => {
             return items;
