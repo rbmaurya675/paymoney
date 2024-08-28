@@ -69,8 +69,11 @@
                                 class="top-box-btn-icon">
                             <div data-v-400f7872="" class="top-box-btn-title">Back</div>
                         </div>
-                        <div data-v-400f7872="" class="container-row top-box-logo-box"><img data-v-400f7872=""
-                                src="/images/logopaymoney-removebg-preview.png" class="top-box-logo-img"></div>
+                        <div data-v-400f7872="" class="container-row top-box-logo-box">
+                            <!-- <img data-v-400f7872=""
+                                src="/images/logopaymoney-removebg-preview.png" class="top-box-logo-img"> -->
+                            <h4>RCI CLUB</h4>
+                        </div>
                     </div><span data-v-400f7872="" class="container-row split-top-box"></span>
                     <div data-v-400f7872="" class="container-column info-box">
                         <div data-v-400f7872="" class="container-row info-title-box">
@@ -124,10 +127,11 @@
                                 <div data-v-400f7872="" class="container-row input-box-input-box">
                                     <input data-v-400f7872="" id="upi-input" value="" name="utr" autocomplete="off"
                                         placeholder="REF NO." class="input-box-input-box-input">
-                                    <button data-v-400f7872="" id="myBtn" disabled="disabled" 
-                                        class="container-row input-box-btn submit" style="color:#03b58b;font-weight: bold;font-size: 20px;">
-                                       
-                                            Submit
+                                    <button data-v-400f7872="" id="myBtn" disabled="disabled"
+                                        class="container-row input-box-btn submit"
+                                        style="color:#03b58b;font-weight: bold;font-size: 20px;">
+
+                                        Submit
                                     </button>
                                 </div>
                             </form>
@@ -221,7 +225,8 @@
                         </div>
                     </div>
                     <div data-v-0162a2fb="" data-v-400f7872="">
-                        <div data-v-0162a2fb="" id="result" class="mint-popup" style="display:none; background: transparent;">
+                        <div data-v-0162a2fb="" id="result" class="mint-popup"
+                            style="display:none; background: transparent;">
                             <div data-v-0162a2fb="" class="container-column content-box">
                                 <div data-v-0162a2fb="" class="container-column white-box">
                                     <div data-v-0162a2fb="" class="container-row title-box">
@@ -414,7 +419,7 @@
             e.preventDefault();
             let id = $(this).attr('id');
             let utr = $('input:eq(0)').val().trim();;
-            console.log("utr"+utr);
+            console.log("utr" + utr);
             $.ajax({
                 type: "POST",
                 url: "/api/webapi/recharge",
@@ -427,12 +432,12 @@
                 success: function (response) {
                     if (response.status == true) {
                         $("#result").css("display", "");
-                         alert(response.message);
+                        alert(response.message);
                         setInterval(() => {
                             window.location.href = "/wallet/recharge";
-                    }, 2000);
+                        }, 2000);
                     }
-                    
+
                 }
             });
         });

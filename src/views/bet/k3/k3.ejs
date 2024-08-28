@@ -16,16 +16,18 @@
     html,
     body {
       height: 100%;
-      width: 100%; 
+      width: 100%;
       background-color: #9195a3;
       padding: 0;
       margin: 0;
     }
+
     .block-click {
       pointer-events: none;
     }
+
     .d-none {
-      display: none!important;
+      display: none !important;
     }
   </style>
 </head>
@@ -35,16 +37,19 @@
     <div data-v-03b808c2="" class="mian game">
       <div data-v-106b99c8="" data-v-03b808c2="" class="navbar">
         <div data-v-106b99c8="" class="navbar-left" onclick="location.href='/home'">
-          <div data-v-03b808c2="" data-v-106b99c8="" class="c-row c-row-middle-center"><img data-v-03b808c2="" data-v-106b99c8="" src="/images/back.c3244ab0.png" class="navbar-back"></div>
+          <div data-v-03b808c2="" data-v-106b99c8="" class="c-row c-row-middle-center"><img data-v-03b808c2=""
+              data-v-106b99c8="" src="/images/back.c3244ab0.png" class="navbar-back"></div>
         </div>
         <div data-v-106b99c8="" class="navbar-title">
           <div data-v-03b808c2="" data-v-106b99c8="" class="c-row c-row-middle-center">
-            <img data-v-03b808c2="" data-v-106b99c8=""  src="/images/logopaymoney-removebg-preview.png" class="logo" style="width: 50px;">
+            <!-- <img data-v-03b808c2="" data-v-106b99c8=""  src="/images/logopaymoney-removebg-preview.png" class="logo" style="width: 50px;"> -->
+            <h4>RCI CLUB</h4>
           </div>
         </div>
         <div data-v-106b99c8="" class="navbar-right">
           <div data-v-03b808c2="" data-v-106b99c8="" class="c-row navbarR">
-            <div data-v-03b808c2="" data-v-106b99c8="" class="c-row item c-row-middle-center" onclick="location.href='/keFuMenu'">
+            <div data-v-03b808c2="" data-v-106b99c8="" class="c-row item c-row-middle-center"
+              onclick="location.href='/keFuMenu'">
               <img data-v-03b808c2="" data-v-106b99c8="" src="/images/audio.webp" class="item-audio">
             </div>
             <div data-v-03b808c2="" data-v-106b99c8="" class="c-row item c-row-middle-center">
@@ -54,14 +59,16 @@
         </div>
       </div>
       <%- include('element/gameHead.ejs') -%>
-      <%- include('element/betting.ejs') -%>
-      <%- include('element/listOrder.ejs') -%>
-      <%- include('element/popupJoin.ejs') -%>
-      <%- include('element/quytac.ejs') -%>
+        <%- include('element/betting.ejs') -%>
+          <%- include('element/listOrder.ejs') -%>
+            <%- include('element/popupJoin.ejs') -%>
+              <%- include('element/quytac.ejs') -%>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+  <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+    integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+    crossorigin="anonymous"></script>
   <script src="/k3/js/main.js"></script>
   <script src="/k3/js/chuck.js"></script>
 </body>

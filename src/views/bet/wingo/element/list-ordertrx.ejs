@@ -32,14 +32,16 @@
 
     .circle {
         width: 30px;
-        height: 30px;
-        line-height: 30px;
+        height: 25px;
+        line-height: 25px;
         border-radius: 50%;
-        background-color: red;
-        color: white;
+        /* background-color: red; */
+        border: 1px solid red;
+        color: black;
         text-align: center;
         margin-right: 5px;
     }
+
 
     .plain-text {
         margin-right: 10px;
@@ -56,20 +58,20 @@
         <span data-v-a9660e98="" class="txt"> My history </span>
     </div>
     <div data-v-a9660e98="" class="li c-row c-row-center">
-        <span data-v-a9660e98="" id="chartButton"> Chart </span>
+        <span data-v-a9660e98="" id="chartButton" class="txt"> Chart </span>
     </div>
 </div>
 
 
 <script>
     // JavaScript to handle button click and display data
-    document.getElementById('chartButton').addEventListener('click', function() {
+    document.getElementById('chartButton').addEventListener('click', function () {
         console.log("abc.....")
         var chartData = document.getElementById('chartData');
         chartData.style.display = 'block'; // Display the data container
     });
 </script>
-<div data-v-a9660e98="" class="con-box"> 
+<div data-v-a9660e98="" class="con-box">
     <div data-v-a9660e98="" class="list m-t-10">
         <div data-v-a9660e98="" class="wrap">
             <div data-v-a9660e98="" class="c-tc van-row">
@@ -115,15 +117,14 @@
 <div data-v-a9660e98="" class="con-box p-b-20" style="display: none">
     <div data-v-a9660e98="" class="c-row c-flew-end p-r-20">
         <div data-v-a9660e98="" class="bettingMore c-tc c-row c-row-middle-center">
-            More<i data-v-a9660e98="" class="van-icon van-icon-arrow"
-                style="color: rgb(84, 94, 104); font-size: 15px">
+            More<i data-v-a9660e98="" class="van-icon van-icon-arrow" style="color: rgb(84, 94, 104); font-size: 15px">
                 <!---->
             </i>
         </div>
     </div>
     <div data-v-a9660e98="" class="list m-t-10">
         <div data-v-a9660e98="" class="p-t-5 p-b-5" id="history-order">
-            
+
         </div>
         <div data-v-a9660e98="" class="list-fooder"></div>
     </div>
@@ -144,12 +145,16 @@
 </div>
 <div id="chartData" style="display: none;">
     <div data-v-a9660e98="" class="c-tc van-row">
-        <div data-v-a9660e98="" class="van-col van-col--12" style="background-color: brown; color: white; height: 40px;margin-top: 15px; padding-top: 15px;">Period</div>
-        <div data-v-a9660e98="" class="van-col van-col--12" style="background-color: brown; color: white;height: 40px;margin-top: 15px; padding-top: 15px;">Number</div>
+        <div data-v-a9660e98="" class="van-col van-col--12"
+            style="background-color: brown; color: white; height: 40px;margin-top: 15px; padding-top: 15px;">Period
+        </div>
+        <div data-v-a9660e98="" class="van-col van-col--12"
+            style="background-color: brown; color: white;height: 40px;margin-top: 15px; padding-top: 15px;">Number</div>
     </div>
-    <div class="title">Statistic (last 100 Periods)</div>
+    <div class="title" style="margin-left: 10px; margin-top: 10px;">Statistic (last 100 Periods)</div>
 
-    <div class="row">
+
+    <div class="row" style="padding: 10px;">
         <div class="label">Winning number</div>
         <div class="data">
             <div class="circle">0</div>
@@ -165,7 +170,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="padding: 10px;">
         <div class="label">Missing</div>
         <div class="data" id="missing-data">
             <span class="plain-text">10</span>
@@ -181,7 +186,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="padding: 10px;">
         <div class="label">Avg missing</div>
         <div class="data" id="avg-missing">
             <span class="plain-text">9</span>
@@ -197,7 +202,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="padding: 5px;">
         <div class="label">Frequency</div>
         <div class="data" id="frequency">
             <span class="plain-text">9</span>
@@ -213,7 +218,7 @@
         </div>
     </div>
     <hr style="margin-top:20px">
-    <ul style="color: red" id="trx-data-list1">
+    <ul style="padding: 5px;" id="trx-data-list1">
     </ul>
     <div data-v-a9660e98="" class="page-nav c-row c-row-center c-tc">
         <div data-v-a9660e98="" class="arr c-row c-row-middle-center" onclick="handleLeftClick()">
@@ -301,11 +306,13 @@
       });
     });
   </script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="/js/client.js"></script>
-  <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
-  <!-- <script src="/js/trx.js"></script> -->
-  <!-- <script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/client.js"></script>
+<script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+    integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+    crossorigin="anonymous"></script>
+<!-- <script src="/js/trx.js"></script> -->
+<!-- <script>
     // Array of possible values
     const avgMissingValues = [9, 8, 6, 11, 13, 6, 7, 9, 8];
     const frequencyValues = [9, 13, 14, 8, 8, 9, 14, 9, 7, 9];
@@ -334,12 +341,12 @@
     setInterval(updateValues, 60000);
 </script> -->
 
-  <script>
+<script>
     // Function to handle the image click
     function openUrl(url) {
         window.location.href = url;
     }
-  </script>
+</script>
 
 <script>
     $(document).ready(function () {
@@ -451,28 +458,29 @@
             });
         });
     });
-    </script>
-    
-<svg id="line-connector" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></svg> 
+</script>
+
+<svg id="line-connector"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></svg>
 
 <script>
     $(document).ready(function () {
 
-    socket.on('updateValues', data => {
-        const { avgMissing, frequency } = data;
-        
-        const avgMissingContainer = document.getElementById('avg-missing');
-        const frequencyContainer = document.getElementById('frequency');
-        
-        avgMissingContainer.querySelectorAll('.plain-text').forEach((span, index) => {
-            span.textContent = avgMissing[index];
-        });
+        socket.on('updateValues', data => {
+            const { avgMissing, frequency } = data;
 
-        frequencyContainer.querySelectorAll('.plain-text').forEach((span, index) => {
-            span.textContent = frequency[index];
+            const avgMissingContainer = document.getElementById('avg-missing');
+            const frequencyContainer = document.getElementById('frequency');
+
+            avgMissingContainer.querySelectorAll('.plain-text').forEach((span, index) => {
+                span.textContent = avgMissing[index];
+            });
+
+            frequencyContainer.querySelectorAll('.plain-text').forEach((span, index) => {
+                span.textContent = frequency[index];
+            });
         });
-    });
-})
+    })
 </script>
 <!-- <script>
     const itemsPerPage = 10;

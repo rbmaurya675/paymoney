@@ -69,8 +69,11 @@
                                 class="top-box-btn-icon">
                             <div data-v-400f7872="" class="top-box-btn-title">Back</div>
                         </div>
-                        <div data-v-400f7872="" class="container-row top-box-logo-box"><img data-v-400f7872=""
-                                src="/images/logopaymoney-removebg-preview.png" class="top-box-logo-img"></div>
+                        <div data-v-400f7872="" class="container-row top-box-logo-box">
+                            <!-- <img data-v-400f7872=""
+                                src="/images/logopaymoney-removebg-preview.png" class="top-box-logo-img"> -->
+                            <h4>RCI CLUB</h4>
+                        </div>
                     </div><span data-v-400f7872="" class="container-row split-top-box"></span>
                     <div data-v-400f7872="" class="container-column info-box">
                         <div data-v-400f7872="" class="container-row info-title-box">
@@ -100,7 +103,7 @@
                                     class="method-row-title-box-icon">
                             </div>
                             <div data-v-400f7872="" class="container-column method-row-upi-box">
-                               <div data-v-400f7872="" class="container-row method-row-upi-title-box">
+                                <div data-v-400f7872="" class="container-row method-row-upi-title-box">
                                     <div data-v-400f7872="" class="method-row-upi-title-box-title">1.Copy UPI
                                         Information.</div>
                                 </div>
@@ -123,18 +126,19 @@
                             <form id="payment" method="post" action="" enctype="multipart/form-data">
                                 Upload File :
                                 <div data-v-400f7872="" class="container-row input-box-input-box">
-                                    <input required type="file" data-v-400f7872="" id="upi-file" value="" name="upload" autocomplete="off"
-                                        class="input-box-input-box-input">
+                                    <input required type="file" data-v-400f7872="" id="upi-file" value="" name="upload"
+                                        autocomplete="off" class="input-box-input-box-input">
                                 </div>
                                 <br>
                                 Ref No. :
                                 <div data-v-400f7872="" class="container-row input-box-input-box">
-                                    <input required data-v-400f7872="" id="upi-input" value="" name="utr" autocomplete="off"
-                                        placeholder="REF NO." class="input-box-input-box-input">
-                                    <button data-v-400f7872="" id="myBtn" disabled="disabled" 
-                                        class="container-row input-box-btn submit" style="color:#03b58b;font-weight: bold;font-size: 20px;">
-                                       
-                                            Submit
+                                    <input required data-v-400f7872="" id="upi-input" value="" name="utr"
+                                        autocomplete="off" placeholder="REF NO." class="input-box-input-box-input">
+                                    <button data-v-400f7872="" id="myBtn" disabled="disabled"
+                                        class="container-row input-box-btn submit"
+                                        style="color:#03b58b;font-weight: bold;font-size: 20px;">
+
+                                        Submit
                                     </button>
                                 </div>
                             </form>
@@ -230,7 +234,8 @@
                         </div>
                     </div>
                     <div data-v-0162a2fb="" data-v-400f7872="">
-                        <div data-v-0162a2fb="" id="result" class="mint-popup" style="display:none; background: transparent;">
+                        <div data-v-0162a2fb="" id="result" class="mint-popup"
+                            style="display:none; background: transparent;">
                             <div data-v-0162a2fb="" class="container-column content-box">
                                 <div data-v-0162a2fb="" class="container-column white-box">
                                     <div data-v-0162a2fb="" class="container-row title-box">
@@ -406,7 +411,7 @@
                     alert("order id invalid");
                     window.location.href = "/wallet/recharge";
                 };
-                
+
                 $('.submit').attr('id', data.id_order);
                 let i = 0;
                 $('#idup').text(infoBank[i].upi);
@@ -420,9 +425,9 @@
             e.preventDefault();
             let id = $(this).attr('id');
             let utr = $('#upi-input').val().trim();
-            let photo =  $('#upi-file').val();
+            let photo = $('#upi-file').val();
 
-            console.log("utr "+utr);
+            console.log("utr " + utr);
             $.ajax({
                 type: "POST",
                 url: "/api/webapi/recharge",
@@ -436,12 +441,12 @@
                 success: function (response) {
                     if (response.status == true) {
                         $("#result").css("display", "");
-                         alert(response.message);
+                        alert(response.message);
                         setInterval(() => {
                             window.location.href = "/wallet/recharge";
-                    }, 2000);
+                        }, 2000);
                     }
-                    
+
                 }
             });
         });
